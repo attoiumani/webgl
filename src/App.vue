@@ -1,28 +1,54 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <canvas id ="canvas"></canvas>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import * as PIXI from "pixi.js";
+
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
+  data() {
+    return {};
+  },
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  mounted() {
+const app = new PIXI.Application();
+document.body.appendChild(app.view);
+
+app.stage.interactive = true;
+
+const container = new PIXI.Container();
+app.stage.addChild(container);
+
+const flag = PIXI.Sprite.from('https://pixijs.io/pixi-filters/tools/screenshots/dist/original.png');
+container.addChild(flag);
+flag.x = 100;
+flag.y = 100;
+
+const displacementSprite = PIXI.Sprite.from('https://pixijs.io/pixi-filters/tools/screenshots/dist/original.png');
+// Make sure the sprite is wrapping.
+displacementSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
+const displacementFilter = new PIXI.filters.NoiseFilter(displacementSprite);
+displacementFilter.padding = 10;
+
+displacementSprite.position = flag.position;
+
+app.stage.addChild(displacementSprite);
+
+flag.filters = [displacementFilter];
+
+displacementFilter.noise = 0.5;
+displacementFilter.seed = 1;
+
+app.ticker.add(() => {
+    // Offset the sprite position to make vFilterCoord update to larger value. Repeat wrapping makes sure there's still pixels on the coordinates.
+    displacementSprite.x++;
+    // Reset x to 0 when it's over width to keep values from going to very huge numbers.
+    if (displacementSprite.x > displacementSprite.width) { displacementSprite.x = 0; }
+});
+
+
+
+  },
+};
+</script>
