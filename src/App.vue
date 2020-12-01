@@ -1,10 +1,9 @@
 <template>
-    <canvas id ="canvas"></canvas>
+  <div><canvas></canvas></div>
 </template>
 
 <script>
 import * as PIXI from "pixi.js";
-
 
 export default {
   data() {
@@ -12,43 +11,38 @@ export default {
   },
 
   mounted() {
-const app = new PIXI.Application();
-document.body.appendChild(app.view);
+    const app = new PIXI.Application({
+      //view: canvas,
+      width: window.innerWidth, //canvas横幅
+      height: window.innerHeight, //canvas縦幅
+      backgroundColor: 0x000000, //背景色
+      autoResize: true, //リサイズ処理
+    });
+    document.body.appendChild(app.view);
 
-app.stage.interactive = true;
+    app.stage.interactive = true;
 
-const container = new PIXI.Container();
-app.stage.addChild(container);
+    const container = new PIXI.Container();
+    app.stage.addChild(container);
 
-const flag = PIXI.Sprite.from('https://pixijs.io/pixi-filters/tools/screenshots/dist/original.png');
-container.addChild(flag);
-flag.x = 100;
-flag.y = 100;
+    const displacementSprite = PIXI.Sprite.from(
+      "https://pixijs.io/pixi-filters/tools/screenshots/dist/original.png"
+    );
+    // Make sure the sprite is wrapping.
+    displacementSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
+    const displacementFilter = new PIXI.filters.NoiseFilter(displacementSprite);
+    displacementFilter.padding = 100;
 
-const displacementSprite = PIXI.Sprite.from('https://pixijs.io/pixi-filters/tools/screenshots/dist/original.png');
-// Make sure the sprite is wrapping.
-displacementSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
-const displacementFilter = new PIXI.filters.NoiseFilter(displacementSprite);
-displacementFilter.padding = 10;
+    app.stage.addChild(displacementSprite);
 
-displacementSprite.position = flag.position;
+    displacementSprite.filters = [displacementFilter];
 
-app.stage.addChild(displacementSprite);
+    displacementFilter.noise = 0.5;
+    displacementFilter.seed = 1;
 
-flag.filters = [displacementFilter];
-
-displacementFilter.noise = 0.5;
-displacementFilter.seed = 1;
-
-app.ticker.add(() => {
-    // Offset the sprite position to make vFilterCoord update to larger value. Repeat wrapping makes sure there's still pixels on the coordinates.
-    displacementSprite.x++;
-    // Reset x to 0 when it's over width to keep values from going to very huge numbers.
-    if (displacementSprite.x > displacementSprite.width) { displacementSprite.x = 0; }
-});
-
-
-
+    app.ticker.add(() => {
+      displacementFilter.seed = Math.floor(Math.random() * 10);
+    });
   },
 };
 </script>
