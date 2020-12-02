@@ -4,3 +4,8 @@
   </div>
 </template>
 
+<style scoped>
+.home {
+  font-size: 1.6rem;
+}
+</style>
