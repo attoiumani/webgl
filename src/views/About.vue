@@ -47,14 +47,6 @@ export default {
       speed: 0,
     });
 
-    /*const glitchFilter1 = new GlitchFilter({
-      slices: 10,
-      offset: 100,
-      fillMode: 1,
-      speed: 0,
-    });
-*/
-
     const image = PIXI.Sprite.from(this.imgPath);
 
     image.hitArea = new PIXI.Rectangle(0, 0, this.width, 512);
