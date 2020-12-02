@@ -1,7 +1,5 @@
 <template>
-<div>
- {{canvas}}
-</div>
+  <canvas id ="canvas"></canvas>
 </template>
 
 <script>
@@ -12,17 +10,17 @@ export default {
   data() {
     return {
       imgPath: require(`@/assets/cr7.jpg`),
-      canvas:null
     };
   },
 
   mounted() {
-    const app = new PIXI.Application({
-      view: this.canvas,
-    });
+
+    const app = new PIXI.Application(
+      //{view: canvas}
+    );
     document.body.appendChild(app.view);
 
-    app.stage.interactive = true;
+    //app.stage.interactive = true;
 
     const container = new PIXI.Container();
     app.stage.addChild(container);
