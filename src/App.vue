@@ -1,45 +1,28 @@
 <template>
-  <canvas id="canvas"></canvas>
+  <div id="app">
+    <router-view/>
+  </div>
 </template>
 
-<script>
-import * as PIXI from "pixi.js";
-import { GlitchFilter } from "pixi-filters";
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
 
-export default {
-  data() {
-    return {
-      imgPath: require(`@/assets/cr7.jpg`),
-    };
-  },
+#nav {
+  padding: 30px;
+}
 
-  mounted() {
-    const app = new PIXI.Application();
-    //{view: canvas}
-    document.body.appendChild(app.view);
-    app.stage.interactive = true;
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
 
-    const container = new PIXI.Container();
-    app.stage.addChild(container);
-
-    const glitchFilter = new GlitchFilter({
-      slices: 10,
-      offset: 100,
-      fillMode: 1,
-      speed: 0,
-    });
-
-    const displacementSprite = PIXI.Sprite.from(this.imgPath);
-
-    displacementSprite.filters = [glitchFilter];
-
-    app.ticker.maxFPS = 1;
-    app.ticker.add(function () {
-      glitchFilter.offset = Math.floor(Math.random() * 100);
-      glitchFilter.slices = Math.floor(Math.random() * 10);
-    });
-
-    app.stage.addChild(displacementSprite);
-  },
-};
-</script>
+#nav a.router-link-exact-active {
+  color: #42b983;
+}
+</style>
