@@ -1,5 +1,7 @@
 <template>
-  <canvas id ="canvas"></canvas>
+<div>
+ {{canvas}}
+</div>
 </template>
 
 <script>
@@ -8,12 +10,15 @@ import { GlitchFilter } from "pixi-filters";
 
 export default {
   data() {
-    return {};
+    return {
+      imgPath: require(`@/assets/cr7.jpg`),
+      canvas:null
+    };
   },
 
   mounted() {
     const app = new PIXI.Application({
-      //view: this.canvas,
+      view: this.canvas,
     });
     document.body.appendChild(app.view);
 
@@ -35,7 +40,7 @@ export default {
       glitchFilter.slices = Math.floor(Math.random() * 10);
     });
 
-    const displacementSprite = PIXI.Sprite.from(`assets/logo.png`);
+    const displacementSprite = PIXI.Sprite.from(this.imgPath);
 
     app.stage.addChild(displacementSprite);
 
