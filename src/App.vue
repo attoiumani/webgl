@@ -1,9 +1,10 @@
 <template>
-  <div><canvas></canvas></div>
+  <canvas id ="canvas"></canvas>
 </template>
 
 <script>
 import * as PIXI from "pixi.js";
+import { GlitchFilter } from "pixi-filters";
 
 export default {
   data() {
@@ -12,11 +13,7 @@ export default {
 
   mounted() {
     const app = new PIXI.Application({
-      //view: canvas,
-      width: window.innerWidth, //canvas横幅
-      height: window.innerHeight, //canvas縦幅
-      backgroundColor: 0x000000, //背景色
-      autoResize: true, //リサイズ処理
+      //view: this.canvas,
     });
     document.body.appendChild(app.view);
 
@@ -25,24 +22,26 @@ export default {
     const container = new PIXI.Container();
     app.stage.addChild(container);
 
+    const glitchFilter = new GlitchFilter({
+      slices: 10,
+      offset: 100,
+      fillMode: 1,
+      speed: 0,
+    });
+
+    app.ticker.maxFPS = 1;
+    app.ticker.add(function () {
+      glitchFilter.offset = Math.floor(Math.random() * 100);
+      glitchFilter.slices = Math.floor(Math.random() * 10);
+    });
+
     const displacementSprite = PIXI.Sprite.from(
       "https://pixijs.io/pixi-filters/tools/screenshots/dist/original.png"
     );
-    // Make sure the sprite is wrapping.
-    displacementSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
-    const displacementFilter = new PIXI.filters.NoiseFilter(displacementSprite);
-    displacementFilter.padding = 100;
 
     app.stage.addChild(displacementSprite);
 
-    displacementSprite.filters = [displacementFilter];
-
-    displacementFilter.noise = 0.5;
-    displacementFilter.seed = 1;
-
-    app.ticker.add(() => {
-      displacementFilter.seed = Math.floor(Math.random() * 10);
-    });
+    displacementSprite.filters = [glitchFilter];
   },
 };
 </script>
