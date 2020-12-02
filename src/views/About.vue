@@ -44,19 +44,14 @@ export default {
 
     image.filters = [glitchFilter];
 
-
-/*displacementSprite.on('mouseover', function () {
-    gsap.to(
-        glitchFilter.offset,
-        2,
-        { x: 0, y: 100, });
-});*/
-
+    image.on("mouseover", function () {
+      alert("test");
+    });
 
     app.ticker.maxFPS = 1;
     app.ticker.add(function () {
-      glitchFilter.offset = Math.floor(Math.random() * 100);
-      glitchFilter.slices = Math.floor(Math.random() * 10);
+      //glitchFilter.offset = Math.floor(Math.random() * 100);
+      //glitchFilter.slices = Math.floor(Math.random() * 10);
     });
 
     app.stage.addChild(image);
