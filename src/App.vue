@@ -35,9 +35,7 @@ export default {
       glitchFilter.slices = Math.floor(Math.random() * 10);
     });
 
-    const displacementSprite = PIXI.Sprite.from(
-      "https://pixijs.io/pixi-filters/tools/screenshots/dist/original.png"
-    );
+    const displacementSprite = PIXI.Sprite.from(`assets/logo.png`);
 
     app.stage.addChild(displacementSprite);
 
