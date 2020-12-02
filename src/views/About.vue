@@ -14,11 +14,13 @@ export default {
   },
 
   mounted() {
+    const canvas = document.querySelector('canvas');
+
     const app = new PIXI.Application({
-      //view:canvas
+      view:canvas,
+      autoResize: true,
       });
   
-    document.body.appendChild(app.view);
     app.stage.interactive = true;
 
     const container = new PIXI.Container();
