@@ -21,7 +21,7 @@ export default {
     return {
       imgPath: require(`@/assets/images/2019/messi2019.jpg`),
       width: 800,
-      height: 500,
+      height: 800,
     };
   },
 
@@ -47,14 +47,23 @@ export default {
       speed: 0,
     });
 
+    /*const glitchFilter1 = new GlitchFilter({
+      slices: 10,
+      offset: 100,
+      fillMode: 1,
+      speed: 0,
+    });
+*/
+
     const image = PIXI.Sprite.from(this.imgPath);
 
-    image.hitArea = new PIXI.Rectangle(0, 0, this.width, this.height);
+    image.hitArea = new PIXI.Rectangle(0, 0, this.width, 512);
     image.interactive = true;
 
     image.on("mouseover", function () {
       app.ticker.maxFPS = 5;
       app.ticker.add(function () {
+        text.filters = [glitchFilter];
         image.filters = [glitchFilter];
         glitchFilter.offset = Math.floor(Math.random() * 100);
         glitchFilter.slices = Math.floor(Math.random() * 10);
@@ -75,18 +84,10 @@ export default {
       align: "center",
     });
     text.x = 50;
-    text.y = 200;
+    text.y = 600;
 
-    text.filters = [glitchFilter];
-
-    app.ticker.add(function () {
-      app.ticker.maxFPS = 5;
-      text.filters = [glitchFilter];
-      glitchFilter.offset = Math.floor(Math.random() * 100);
-      glitchFilter.slices = Math.floor(Math.random() * 10);
-    });
-
-    app.stage.addChild(image, text);
+    app.stage.addChild(image);
+    app.stage.addChild(text);
   },
 };
 </script>
