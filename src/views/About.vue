@@ -1,5 +1,10 @@
 <template>
-  <canvas id="canvas"></canvas>
+  <div>
+    <h1>受賞</h1>
+    <h2>Lionel Andrés Messi Cuccittini</h2>
+    <canvas id="canvas"></canvas>
+    <div>50試合出場 51goal</div>
+  </div>
 </template>
 
 <script>
@@ -9,18 +14,19 @@ import { GlitchFilter } from "pixi-filters";
 export default {
   data() {
     return {
-      imgPath: require(`@/assets/cr7.jpg`),
+      imgPath: require(`@/assets/images/2019/messi2019.jpg`),
     };
   },
 
   mounted() {
-    const canvas = document.querySelector('canvas');
+    const canvas = document.querySelector("canvas");
 
     const app = new PIXI.Application({
-      view:canvas,
+      view: canvas,
+      backgroundColor: 0x000000,
       autoResize: true,
-      });
-  
+    });
+
     app.stage.interactive = true;
 
     const container = new PIXI.Container();
