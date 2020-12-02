@@ -1,9 +1,13 @@
 <template>
-  <div>
+  <div class="main">
     <h1>受賞</h1>
     <h2>Lionel Messi</h2>
     <canvas id="canvas"></canvas>
-    <div>50試合出場 51goal</div>
+    <div class="fontcolor-white fontsize-36">
+      50<span class="fontsize-16">GAME</span> 51<span class="fontsize-16"
+        >GOAL</span
+      >
+    </div>
   </div>
 </template>
 
@@ -16,8 +20,8 @@ export default {
   data() {
     return {
       imgPath: require(`@/assets/images/2019/messi2019.jpg`),
-      width:800,
-      height:500
+      width: 800,
+      height: 500,
     };
   },
 
@@ -26,11 +30,10 @@ export default {
 
     const app = new PIXI.Application({
       view: canvas,
-      backgroundColor: 0x000000,
       width: this.width,
       height: this.height,
-      autoResize: true,
     });
+    //document.body.appendChild(app.view);
 
     app.stage.interactive = true;
 
@@ -65,7 +68,47 @@ export default {
       });
     });
 
-    app.stage.addChild(image);
+    let text = new PIXI.Text(50, {
+      fontSize: 80,
+      fontWeight: "400",
+      fill: 0x3b5a97,
+      align: "center",
+    });
+    text.x = 50;
+    text.y = 200;
+
+    text.filters = [glitchFilter];
+
+    app.ticker.add(function () {
+      app.ticker.maxFPS = 5;
+      text.filters = [glitchFilter];
+      glitchFilter.offset = Math.floor(Math.random() * 100);
+      glitchFilter.slices = Math.floor(Math.random() * 10);
+    });
+
+    app.stage.addChild(image, text);
   },
 };
 </script>
+
+<style scoped>
+h1 {
+  margin-top: 0px;
+}
+
+.main {
+  font-size: 1.6rem;
+}
+
+.fontcolor-white {
+  color: white;
+}
+
+.fontsize-16 {
+  font-size: 1.6rem;
+}
+
+.fontsize-36 {
+  font-size: 3.6rem;
+}
+</style>
