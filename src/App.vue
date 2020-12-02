@@ -1,5 +1,5 @@
 <template>
-  <canvas id ="canvas"></canvas>
+  <canvas id="canvas"></canvas>
 </template>
 
 <script>
@@ -14,13 +14,10 @@ export default {
   },
 
   mounted() {
-
-    const app = new PIXI.Application(
-      //{view: canvas}
-    );
+    const app = new PIXI.Application();
+    //{view: canvas}
     document.body.appendChild(app.view);
-
-    //app.stage.interactive = true;
+    app.stage.interactive = true;
 
     const container = new PIXI.Container();
     app.stage.addChild(container);
@@ -32,17 +29,17 @@ export default {
       speed: 0,
     });
 
+    const displacementSprite = PIXI.Sprite.from(this.imgPath);
+
+    displacementSprite.filters = [glitchFilter];
+
     app.ticker.maxFPS = 1;
     app.ticker.add(function () {
       glitchFilter.offset = Math.floor(Math.random() * 100);
       glitchFilter.slices = Math.floor(Math.random() * 10);
     });
 
-    const displacementSprite = PIXI.Sprite.from(this.imgPath);
-
     app.stage.addChild(displacementSprite);
-
-    displacementSprite.filters = [glitchFilter];
   },
 };
 </script>
