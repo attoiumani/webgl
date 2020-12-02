@@ -8,6 +8,7 @@
 </template>
 
 <script>
+//import { gsap } from "gsap";
 import * as PIXI from "pixi.js";
 import { GlitchFilter } from "pixi-filters";
 
@@ -39,9 +40,18 @@ export default {
       speed: 0,
     });
 
-    const displacementSprite = PIXI.Sprite.from(this.imgPath);
+    const image = PIXI.Sprite.from(this.imgPath);
 
-    displacementSprite.filters = [glitchFilter];
+    image.filters = [glitchFilter];
+
+
+/*displacementSprite.on('mouseover', function () {
+    gsap.to(
+        glitchFilter.offset,
+        2,
+        { x: 0, y: 100, });
+});*/
+
 
     app.ticker.maxFPS = 1;
     app.ticker.add(function () {
@@ -49,7 +59,7 @@ export default {
       glitchFilter.slices = Math.floor(Math.random() * 10);
     });
 
-    app.stage.addChild(displacementSprite);
+    app.stage.addChild(image);
   },
 };
 </script>
