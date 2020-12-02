@@ -12,7 +12,7 @@
 </template>
 
 <script>
-//import { gsap } from "gsap";
+import { gsap } from "gsap";
 import * as PIXI from "pixi.js";
 import { GlitchFilter } from "pixi-filters";
 
@@ -55,10 +55,13 @@ export default {
     image.on("mouseover", function () {
       app.ticker.maxFPS = 5;
       app.ticker.add(function () {
-        text.filters = [glitchFilter];
+        numbertext.filters = [glitchFilter];
         image.filters = [glitchFilter];
-        glitchFilter.offset = Math.floor(Math.random() * 100);
-        glitchFilter.slices = Math.floor(Math.random() * 10);
+        gsap.to(glitchFilter, 0, {
+        offset : Math.floor(Math.random() * 100),
+        slices : Math.floor(Math.random() * 10),
+        });
+
       });
     });
 
@@ -69,17 +72,17 @@ export default {
       });
     });
 
-    let text = new PIXI.Text(50, {
+    let numbertext = new PIXI.Text("50                  51", {
       fontSize: 80,
       fontWeight: "400",
       fill: 0x3b5a97,
       align: "center",
     });
-    text.x = 50;
-    text.y = 600;
+    numbertext.x = 50;
+    numbertext.y = 600;
 
     app.stage.addChild(image);
-    app.stage.addChild(text);
+    app.stage.addChild(numbertext);
   },
 };
 </script>
