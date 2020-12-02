@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>受賞</h1>
-    <h2>Lionel Andrés Messi Cuccittini</h2>
+    <h2>Lionel Messi</h2>
     <canvas id="canvas"></canvas>
     <div>50試合出場 51goal</div>
   </div>
@@ -16,6 +16,8 @@ export default {
   data() {
     return {
       imgPath: require(`@/assets/images/2019/messi2019.jpg`),
+      width:800,
+      height:500
     };
   },
 
@@ -25,6 +27,8 @@ export default {
     const app = new PIXI.Application({
       view: canvas,
       backgroundColor: 0x000000,
+      width: this.width,
+      height: this.height,
       autoResize: true,
     });
 
@@ -42,16 +46,23 @@ export default {
 
     const image = PIXI.Sprite.from(this.imgPath);
 
-    image.filters = [glitchFilter];
+    image.hitArea = new PIXI.Rectangle(0, 0, this.width, this.height);
+    image.interactive = true;
 
     image.on("mouseover", function () {
-      alert("test");
+      app.ticker.maxFPS = 5;
+      app.ticker.add(function () {
+        image.filters = [glitchFilter];
+        glitchFilter.offset = Math.floor(Math.random() * 100);
+        glitchFilter.slices = Math.floor(Math.random() * 10);
+      });
     });
 
-    app.ticker.maxFPS = 1;
-    app.ticker.add(function () {
-      //glitchFilter.offset = Math.floor(Math.random() * 100);
-      //glitchFilter.slices = Math.floor(Math.random() * 10);
+    image.on("mouseout", function () {
+      app.ticker.add(function () {
+        glitchFilter.offset = 0;
+        glitchFilter.slices = 0;
+      });
     });
 
     app.stage.addChild(image);
