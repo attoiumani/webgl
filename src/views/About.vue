@@ -58,10 +58,9 @@ export default {
         numbertext.filters = [glitchFilter];
         image.filters = [glitchFilter];
         gsap.to(glitchFilter, 0, {
-        offset : Math.floor(Math.random() * 100),
-        slices : Math.floor(Math.random() * 10),
+          offset: Math.floor(Math.random() * 100),
+          slices: Math.floor(Math.random() * 10),
         });
-
       });
     });
 
@@ -72,7 +71,7 @@ export default {
       });
     });
 
-    let numbertext = new PIXI.Text("50                  51", {
+    let numbertext = new PIXI.Text("50            51", {
       fontSize: 80,
       fontWeight: "400",
       fill: 0x3b5a97,
@@ -81,8 +80,17 @@ export default {
     numbertext.x = 50;
     numbertext.y = 600;
 
+    let text = new PIXI.Text("GAME                     GOAL", {
+      fontSize: 40,
+      fontWeight: "200",
+      fill: "#f0f8ff",
+      align: "center",
+    });
+    text.x = 160;
+    text.y = 640;
+
     app.stage.addChild(image);
-    app.stage.addChild(numbertext);
+    app.stage.addChild(numbertext, text);
   },
 };
 </script>
