@@ -2,12 +2,8 @@
   <div class="main">
     <h1>受賞</h1>
     <h2>Lionel Messi</h2>
-    <canvas id="canvas"></canvas>
-    <div class="fontcolor-white fontsize-36">
-      50<span class="fontsize-16">GAME</span> 51<span class="fontsize-16"
-        >GOAL</span
-      >
-    </div>
+    <canvas id="canvas1"></canvas>
+    <div></div>
   </div>
 </template>
 
@@ -20,22 +16,18 @@ export default {
   data() {
     return {
       imgPath: require(`@/assets/images/2019/messi2019.jpg`),
-      width: 800,
-      height: 800,
     };
   },
 
   mounted() {
-    const canvas = document.querySelector("canvas");
+    const canvas = document.querySelector("#canvas1");
 
     const app = new PIXI.Application({
       view: canvas,
-      width: this.width,
-      height: this.height,
+      width: window.innerWidth, //canvas横幅
+      height: window.innerHeight, //canvas縦幅
     });
-    //document.body.appendChild(app.view);
 
-    app.stage.interactive = true;
 
     const container = new PIXI.Container();
     app.stage.addChild(container);
@@ -49,7 +41,7 @@ export default {
 
     const image = PIXI.Sprite.from(this.imgPath);
 
-    image.hitArea = new PIXI.Rectangle(0, 0, this.width, 512);
+    image.hitArea = new PIXI.Rectangle(0, 0, 800, 512);
     image.interactive = true;
 
     image.on("mouseover", function () {
@@ -71,16 +63,17 @@ export default {
       });
     });
 
-    let numbertext = new PIXI.Text("50            51", {
+    let goalnumber = new PIXI.Text("50", {
       fontSize: 80,
       fontWeight: "400",
       fill: 0x3b5a97,
       align: "center",
+      fontStyle: "italic",
     });
-    numbertext.x = 50;
-    numbertext.y = 600;
+    goalnumber.x = 50;
+    goalnumber.y = 600;
 
-    let text = new PIXI.Text("GAME                     GOAL", {
+    let text = new PIXI.Text("GAME             GOAL             ASSI", {
       fontSize: 40,
       fontWeight: "200",
       fill: "#f0f8ff",
@@ -89,8 +82,7 @@ export default {
     text.x = 160;
     text.y = 640;
 
-    app.stage.addChild(image);
-    app.stage.addChild(numbertext, text);
+    container.addChild(image, goalnumber, text);
   },
 };
 </script>
