@@ -1,9 +1,7 @@
 <template>
   <div class="main">
-    <h1>受賞</h1>
-    <h2>Lionel Messi</h2>
+    <h1>Lionel Messi</h1>
     <canvas id="canvas1"></canvas>
-    <div></div>
   </div>
 </template>
 
@@ -24,10 +22,8 @@ export default {
 
     const app = new PIXI.Application({
       view: canvas,
-      width: window.innerWidth, //canvas横幅
-      height: window.innerHeight, //canvas縦幅
+      height: window.innerHeight, 
     });
-
 
     const container = new PIXI.Container();
     app.stage.addChild(container);
@@ -47,7 +43,7 @@ export default {
     image.on("mouseover", function () {
       app.ticker.maxFPS = 5;
       app.ticker.add(function () {
-        numbertext.filters = [glitchFilter];
+        number.filters = [glitchFilter];
         image.filters = [glitchFilter];
         gsap.to(glitchFilter, 0, {
           offset: Math.floor(Math.random() * 100),
@@ -63,26 +59,27 @@ export default {
       });
     });
 
-    let goalnumber = new PIXI.Text("50", {
-      fontSize: 80,
-      fontWeight: "400",
+    let number = new PIXI.Text("50 51 19", {
+      fontSize: 200,
+      fontWeight: "600",
       fill: 0x3b5a97,
       align: "center",
       fontStyle: "italic",
     });
-    goalnumber.x = 50;
-    goalnumber.y = 600;
+    number.x = 0;
+    number.y = 550;
 
-    let text = new PIXI.Text("GAME             GOAL             ASSI", {
-      fontSize: 40,
-      fontWeight: "200",
-      fill: "#f0f8ff",
-      align: "center",
+
+    let text = new PIXI.Text("GAME              GOAL                assist", {
+    fill: 0x3b5a97,
+    fontSize: 40,
+    fontStyle: "oblique",
+    fontWeight: "bold"
     });
-    text.x = 160;
-    text.y = 640;
+    text.x = 40;
+    text.y = 760;
 
-    container.addChild(image, goalnumber, text);
+    container.addChild(image, number,  text);
   },
 };
 </script>
