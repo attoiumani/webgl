@@ -14,18 +14,18 @@ export default {
   data() {
     return {
       imgPath: require(`@/assets/images/2019/messi2019.jpg`),
+      imgPath1: require(`@/assets/logo.png`),
     };
   },
 
   mounted() {
-    const canvas = document.querySelector("#canvas1");
-
     const app = new PIXI.Application({
-      view: canvas,
-      height: window.innerHeight, 
+      view: document.querySelector("#canvas1"),
+      height: window.innerHeight,
     });
 
     const container = new PIXI.Container();
+
     app.stage.addChild(container);
 
     const glitchFilter = new GlitchFilter({
@@ -36,6 +36,7 @@ export default {
     });
 
     const image = PIXI.Sprite.from(this.imgPath);
+    const image1 = PIXI.Texture.from(this.imgPath1);
 
     image.hitArea = new PIXI.Rectangle(0, 0, 800, 512);
     image.interactive = true;
@@ -59,27 +60,45 @@ export default {
       });
     });
 
-    let number = new PIXI.Text("50 51 19", {
+    let numberTextStyle = {
       fontSize: 200,
       fontWeight: "600",
       fill: 0x3b5a97,
       align: "center",
       fontStyle: "italic",
-    });
+    };
+
+    let TextStyle = {
+      fill: 0x3b5a97,
+      fontSize: 40,
+      fontStyle: "oblique",
+      fontWeight: "bold",
+    };
+
+    let number = new PIXI.Text("50 51 19", numberTextStyle);
     number.x = 0;
     number.y = 550;
 
-
-    let text = new PIXI.Text("GAME              GOAL                assist", {
-    fill: 0x3b5a97,
-    fontSize: 40,
-    fontStyle: "oblique",
-    fontWeight: "bold"
-    });
+    let text = new PIXI.Text(
+      "GAME              GOAL                assist",
+      TextStyle
+    );
     text.x = 40;
     text.y = 760;
 
-    container.addChild(image, number,  text);
+    const graphics = new PIXI.Graphics();
+    graphics.beginTextureFill(
+      image1
+    );
+    //graphics.pivot.x = 15;
+    //graphics.pivot.y = 30;
+    graphics.x = 100;
+    graphics.y = 700;
+    graphics.lineStyle(10, 0xffbd01, 1);
+    graphics.drawRect(0, 0, 200, 200);
+    graphics.endFill();
+
+    container.addChild(image, number, graphics, text);
   },
 };
 </script>
