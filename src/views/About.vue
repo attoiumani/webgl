@@ -21,7 +21,9 @@ export default {
   mounted() {
     const app = new PIXI.Application({
       view: document.querySelector("#canvas1"),
-      height: 9000,
+      //width: window.innerWidth, //canvas横幅
+      height: 9000, //canvas縦幅
+      autoResize: true, //リサイズ処理
     });
 
     const container = new PIXI.Container();
@@ -94,8 +96,8 @@ export default {
     //graphics.pivot.y = 30;
     graphics.x = 100;
     graphics.y = 700;
-    graphics.lineStyle(5, 0xffbd01, 1);
-    graphics.drawCircle(200, 300, 100);
+    graphics.lineStyle(3, 0xffbd01, 1);
+    graphics.drawCircle(50, 300, 200);
     graphics.endFill();
 
     container.addChild(image, number, graphics, text);
@@ -104,6 +106,10 @@ export default {
 </script>
 
 <style scoped>
+canvas{
+  margin:auto;
+}
+
 h1 {
   margin-top: 0px;
 }
