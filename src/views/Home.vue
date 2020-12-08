@@ -1,7 +1,7 @@
 <template>
   <div>
     <swiper class="swiper" :options="swiperOption">
-      <swiper-slide class="swiper-slide">スライダー１</swiper-slide>
+      <swiper-slide class="swiper-slide"><router-link to="/about">2019</router-link></swiper-slide>
       <swiper-slide class="swiper-slide">スライダー２</swiper-slide>
       <swiper-slide class="swiper-slide">スライダー３</swiper-slide>
     </swiper>
