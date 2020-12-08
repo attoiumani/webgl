@@ -21,7 +21,7 @@ export default {
   mounted() {
     const app = new PIXI.Application({
       view: document.querySelector("#canvas1"),
-      height: window.innerHeight,
+      height: 9000,
     });
 
     const container = new PIXI.Container();
@@ -94,8 +94,8 @@ export default {
     //graphics.pivot.y = 30;
     graphics.x = 100;
     graphics.y = 700;
-    graphics.lineStyle(10, 0xffbd01, 1);
-    graphics.drawRect(0, 0, 200, 200);
+    graphics.lineStyle(5, 0xffbd01, 1);
+    graphics.drawCircle(200, 300, 100);
     graphics.endFill();
 
     container.addChild(image, number, graphics, text);
