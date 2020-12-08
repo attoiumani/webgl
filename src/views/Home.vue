@@ -1,18 +1,16 @@
 <template>
-
+  <div>
     <swiper :options="swiperOption">
-      <swiper-slide>
-        <router-link to="/about">2019</router-link>
-      </swiper-slide>
+      <swiper-slide>スライダー１</swiper-slide>
       <swiper-slide>スライダー２</swiper-slide>
       <swiper-slide>スライダー３</swiper-slide>
-
-      <div slot="pagination" class="swiper-pagination" />
-      <div slot="button-prev" class="swiper-button-prev" />
-      <div slot="button-next" class="swiper-button-next" />
     </swiper>
-
+    <div slot="pagination" class="swiper-pagination" />
+    <div slot="button-prev" class="swiper-button-prev" />
+    <div slot="button-next" class="swiper-button-next" />
+  </div>
 </template>
+
 
 <script>
 import Vue from "vue";
@@ -51,5 +49,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>
