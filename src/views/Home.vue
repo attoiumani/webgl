@@ -1,11 +1,9 @@
 <template>
-  <div>
+
     <swiper :options="swiperOption">
       <swiper-slide>
-        <div class="home">
-          <router-link to="/about">2019</router-link>
-        </div></swiper-slide
-      >
+        <router-link to="/about">2019</router-link>
+      </swiper-slide>
       <swiper-slide>スライダー２</swiper-slide>
       <swiper-slide>スライダー３</swiper-slide>
 
@@ -13,14 +11,15 @@
       <div slot="button-prev" class="swiper-button-prev" />
       <div slot="button-next" class="swiper-button-next" />
     </swiper>
-  </div>
+
 </template>
 
 <script>
 import Vue from "vue";
-import VueAwesomeSwiper from "vue-awesome-swiper";
+import Swiper from "swiper/swiper-bundle.esm";
+import getAwesomeSwiper from "vue-awesome-swiper/dist/exporter";
+Vue.use(getAwesomeSwiper(Swiper));
 import "swiper/swiper-bundle.css";
-Vue.use(VueAwesomeSwiper);
 
 export default {
   data() {
@@ -50,3 +49,7 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+
+</style>
