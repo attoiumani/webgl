@@ -14,12 +14,13 @@
 
 <script>
 import Vue from "vue";
-import Swiper from "swiper/swiper-bundle.esm";
+import { Swiper, SwiperSlide }  from "swiper/swiper-bundle.esm";
 import getAwesomeSwiper from "vue-awesome-swiper/dist/exporter";
-Vue.use(getAwesomeSwiper(Swiper));
+Vue.use(getAwesomeSwiper(Swiper,SwiperSlide));
 import "swiper/swiper-bundle.css";
 
 export default {
+  
   data() {
     return {
       swiperOption: {
