@@ -1,9 +1,9 @@
 <template>
   <div>
-    <swiper :options="swiperOption">
-      <swiper-slide>スライダー１</swiper-slide>
-      <swiper-slide>スライダー２</swiper-slide>
-      <swiper-slide>スライダー３</swiper-slide>
+    <swiper class="swiper" :options="swiperOption">
+      <swiper-slide class="swiper-slide">スライダー１</swiper-slide>
+      <swiper-slide class="swiper-slide">スライダー２</swiper-slide>
+      <swiper-slide class="swiper-slide">スライダー３</swiper-slide>
     </swiper>
     <div slot="pagination" class="swiper-pagination" />
     <div slot="button-prev" class="swiper-button-prev" />
@@ -14,19 +14,18 @@
 
 <script>
 import Vue from "vue";
-import { Swiper, SwiperSlide }  from "swiper/swiper-bundle.esm";
+import { Swiper, SwiperSlide } from "swiper/swiper-bundle.esm";
 import getAwesomeSwiper from "vue-awesome-swiper/dist/exporter";
-Vue.use(getAwesomeSwiper(Swiper,SwiperSlide));
+Vue.use(getAwesomeSwiper(Swiper, SwiperSlide));
 import "swiper/swiper-bundle.css";
 
 export default {
-  
   data() {
     return {
       swiperOption: {
         speed: 1000, //スライドの切り替わりスピード
         spaceBetween: 30, //各スライドの余白
-        centeredSlides: true, //スライダーを真ん中に
+        //centeredSlides: true, //スライダーを真ん中に
         loop: true, //無限ループ
         autoplay: {
           //スライドの自動切り替え
@@ -48,6 +47,32 @@ export default {
   },
 };
 </script>
-
 <style scoped>
+.swiper {
+  width: 300px !important;
+  height: 300px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -150px;
+  margin-top: -150px;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+  font-size: 32px;
+  background-color: #2c8dfb;
+  background-position: center;
+  background-size: cover;
+  color: white;
+}
+
+.swiper-pagination{
+    left: 450px;
+    top: 480px;
+}
 </style>
