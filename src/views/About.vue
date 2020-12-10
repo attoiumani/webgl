@@ -96,8 +96,6 @@ export default {
     graphics.beginTextureFill(
       image1,0x00ffff, 1, new PIXI.Matrix(1,0,0,1,500,100)
     );
-    //graphics.pivot.x = 15;
-    //graphics.pivot.y = 30;
     graphics.x = 200;
     graphics.y = 700;
     graphics.lineStyle(3, 0xffbd01, 1);
