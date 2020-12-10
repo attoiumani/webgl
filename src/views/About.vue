@@ -94,12 +94,12 @@ export default {
 
     const graphics = new PIXI.Graphics();
     graphics.beginTextureFill(
-      image1,0x00ffff, 1, new PIXI.Matrix(1,0,0,1,500,100)
+      image1,0xFFFFFF, 1, new PIXI.Matrix(1,0,0,1,500,50)
     );
-    graphics.x = 200;
-    graphics.y = 700;
-    graphics.lineStyle(3, 0xffbd01, 1);
-    graphics.drawCircle(50, 300, 200);
+    graphics.x = 300;
+    graphics.y = 800;
+    graphics.lineStyle(3, 0, 1);
+    graphics.drawCircle(50, 300, 250);
     graphics.endFill();
 
     container.addChild(image, number, graphics, text);
