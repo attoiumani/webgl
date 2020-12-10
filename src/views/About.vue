@@ -94,7 +94,7 @@ export default {
 
     const graphics = new PIXI.Graphics();
     graphics.beginTextureFill(
-      image1
+      image1,0x00ffff, 1, new PIXI.Matrix(1,0,0,1,500,100)
     );
     //graphics.pivot.x = 15;
     //graphics.pivot.y = 30;
