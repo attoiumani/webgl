@@ -21,8 +21,10 @@ export default {
   mounted() {
     const app = new PIXI.Application({
       view: document.querySelector("#canvas1"),
-      //width: window.innerWidth, //canvas横幅
-      height: 9000, //canvas縦幅
+      width: window.innerWidth, //canvas横幅
+      height: 3000, //canvas縦幅
+     /*width: 1000, //canvas横幅
+      height: 4000, //canvas縦幅*/
       autoResize: true, //リサイズ処理
     });
 
@@ -39,9 +41,11 @@ export default {
 
     const image = PIXI.Sprite.from(this.imgPath);
     const image1 = PIXI.Texture.from(this.imgPath1);
+    
 
     image.hitArea = new PIXI.Rectangle(0, 0, 800, 512);
     image.interactive = true;
+    image.x=500;
 
     image.on("mouseover", function () {
       app.ticker.maxFPS = 5;
@@ -78,14 +82,14 @@ export default {
     };
 
     let number = new PIXI.Text("50 51 19", numberTextStyle);
-    number.x = 0;
+    number.x = 500;
     number.y = 550;
 
     let text = new PIXI.Text(
       "GAME              GOAL                assist",
       TextStyle
     );
-    text.x = 40;
+    text.x = 550;
     text.y = 760;
 
     const graphics = new PIXI.Graphics();
@@ -94,7 +98,7 @@ export default {
     );
     //graphics.pivot.x = 15;
     //graphics.pivot.y = 30;
-    graphics.x = 100;
+    graphics.x = 200;
     graphics.y = 700;
     graphics.lineStyle(3, 0xffbd01, 1);
     graphics.drawCircle(50, 300, 200);
@@ -106,9 +110,6 @@ export default {
 </script>
 
 <style scoped>
-canvas{
-  margin:auto;
-}
 
 h1 {
   margin-top: 0px;
