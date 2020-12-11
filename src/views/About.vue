@@ -7,6 +7,7 @@
 
 <script>
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import * as PIXI from "pixi.js";
 import { GlitchFilter } from "pixi-filters";
 
@@ -26,6 +27,7 @@ export default {
       /*width: 1000, //canvas横幅
       height: 4000, //canvas縦幅*/
       autoResize: true, //リサイズ処理
+      backgroundColor:0xffffff
     });
 
     const container = new PIXI.Container();
@@ -96,7 +98,13 @@ export default {
       alpha: 0.0,
       repeat: -1,
       yoyo: true,
+      ScrollTrigger: {
+        trigger: text2, // 要素".a"がビューポートに入ったときにアニメーション開始
+        start: "center center", // アニメーション開始位置
+        markers: true, // マーカー表示
+      },
     });
+    console.log(ScrollTrigger);
     text2.x = 700;
     text2.y = 900;
 
@@ -112,7 +120,7 @@ export default {
     graphics.lineStyle(3, 0, 1);
     graphics.drawCircle(50, 300, 250);
     graphics.endFill();
-   gsap.to(graphics, 2, {
+    gsap.to(graphics, 2, {
       alpha: 0.0,
       repeat: -1,
       yoyo: true,
