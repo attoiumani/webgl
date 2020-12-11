@@ -43,13 +43,6 @@ export default {
       speed: 0,
     });
 
-    const glitchFilter1 = new GlitchFilter({
-      slices: 10,
-      offset: 100,
-      fillMode: 1,
-      speed: 0,
-    });
-
     const image = PIXI.Sprite.from(this.imgPath);
     const image1 = PIXI.Texture.from(this.imgPath1);
 
@@ -129,19 +122,15 @@ export default {
     graphics.lineStyle(3, 0, 1);
     graphics.drawCircle(50, 300, 250);
     graphics.endFill();
-    app.ticker.add(function () {
-      gsap.to(graphics, 0, {
-        filters : [glitchFilter1],
-        offset: Math.floor(Math.random() * 100),
-        slices: Math.floor(Math.random() * 10),
-        scrollTrigger: {
-          trigger: ".torigger", // 要素".b"がビューポートに入ったときにアニメーション開始
-          start: "top center", // アニメーション開始位置
-          end: "top 200px", // アニメーション終了位置
-          //scrub: true, // アニメーションをスクロール位置にリンクさせる
-          markers: true, // マーカー表示
-        },
-      });
+    gsap.to(graphics, 5, {
+      alpha: 0.0,
+      scrollTrigger: {
+        trigger: ".torigger", // 要素".b"がビューポートに入ったときにアニメーション開始
+        start: "top center", // アニメーション開始位置
+        end: "top 200px", // アニメーション終了位置
+        //scrub: true, // アニメーションをスクロール位置にリンクさせる
+        markers: true, // マーカー表示
+      },
     });
     container.addChild(image, number, graphics, text, text2);
   },
