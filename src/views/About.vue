@@ -23,7 +23,7 @@ export default {
       view: document.querySelector("#canvas1"),
       width: window.innerWidth, //canvas横幅
       height: 3000, //canvas縦幅
-     /*width: 1000, //canvas横幅
+      /*width: 1000, //canvas横幅
       height: 4000, //canvas縦幅*/
       autoResize: true, //リサイズ処理
     });
@@ -41,11 +41,10 @@ export default {
 
     const image = PIXI.Sprite.from(this.imgPath);
     const image1 = PIXI.Texture.from(this.imgPath1);
-    
 
     image.hitArea = new PIXI.Rectangle(0, 0, 800, 512);
     image.interactive = true;
-    image.x=500;
+    image.x = 500;
 
     image.on("mouseover", function () {
       app.ticker.maxFPS = 5;
@@ -92,23 +91,38 @@ export default {
     text.x = 550;
     text.y = 760;
 
+    let text2 = new PIXI.Text("Virgil van Dijk", TextStyle);
+    gsap.to(text2, 2, {
+      alpha: 0.0,
+      repeat: -1,
+      yoyo: true,
+    });
+    text2.x = 700;
+    text2.y = 900;
+
     const graphics = new PIXI.Graphics();
     graphics.beginTextureFill(
-      image1,0xFFFFFF, 1, new PIXI.Matrix(1,0,0,1,500,50)
+      image1,
+      0xffffff,
+      1,
+      new PIXI.Matrix(1, 0, 0, 1, 500, 50)
     );
     graphics.x = 300;
     graphics.y = 800;
     graphics.lineStyle(3, 0, 1);
     graphics.drawCircle(50, 300, 250);
     graphics.endFill();
-
-    container.addChild(image, number, graphics, text);
+   gsap.to(graphics, 2, {
+      alpha: 0.0,
+      repeat: -1,
+      yoyo: true,
+    });
+    container.addChild(image, number, graphics, text, text2);
   },
 };
 </script>
 
 <style scoped>
-
 h1 {
   margin-top: 0px;
 }
