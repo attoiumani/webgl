@@ -96,8 +96,8 @@ export default {
     text.y = 760;
 
     let text2 = new PIXI.Text("Virgil van Dijk", TextStyle);
-    gsap.set(text2, {alpha: 0.0,});
-    gsap.to(text2, 5,{
+    gsap.set(text2, { alpha: 0.0 });
+    gsap.to(text2, 5, {
       alpha: 1.0,
       scrollTrigger: {
         trigger: ".torigger", // 要素".b"がビューポートに入ったときにアニメーション開始
@@ -124,8 +124,14 @@ export default {
     graphics.endFill();
     gsap.to(graphics, 2, {
       alpha: 0.0,
-      repeat: -1,
       yoyo: true,
+      scrollTrigger: {
+        trigger: ".torigger", // 要素".b"がビューポートに入ったときにアニメーション開始
+        start: "top center", // アニメーション開始位置
+        end: "top 200px", // アニメーション終了位置
+        //scrub: true, // アニメーションをスクロール位置にリンクさせる
+        markers: true, // マーカー表示
+      },
     });
     container.addChild(image, number, graphics, text, text2);
   },
