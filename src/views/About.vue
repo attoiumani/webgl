@@ -2,6 +2,7 @@
   <div class="main">
     <h1>Lionel Messi</h1>
     <canvas id="canvas1"></canvas>
+    <div class="torigger"></div>
   </div>
 </template>
 
@@ -10,6 +11,8 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import * as PIXI from "pixi.js";
 import { GlitchFilter } from "pixi-filters";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default {
   data() {
@@ -27,7 +30,6 @@ export default {
       /*width: 1000, //canvas横幅
       height: 4000, //canvas縦幅*/
       autoResize: true, //リサイズ処理
-      backgroundColor:0xffffff
     });
 
     const container = new PIXI.Container();
@@ -94,17 +96,17 @@ export default {
     text.y = 760;
 
     let text2 = new PIXI.Text("Virgil van Dijk", TextStyle);
-    gsap.to(text2, 2, {
-      alpha: 0.0,
-      repeat: -1,
-      yoyo: true,
-      ScrollTrigger: {
-        trigger: text2, // 要素".a"がビューポートに入ったときにアニメーション開始
-        start: "center center", // アニメーション開始位置
+    gsap.set(text2, {alpha: 0.0,});
+    gsap.to(text2, 5,{
+      alpha: 1.0,
+      scrollTrigger: {
+        trigger: ".torigger", // 要素".b"がビューポートに入ったときにアニメーション開始
+        start: "top center", // アニメーション開始位置
+        end: "top 200px", // アニメーション終了位置
+        //scrub: true, // アニメーションをスクロール位置にリンクさせる
         markers: true, // マーカー表示
       },
     });
-    console.log(ScrollTrigger);
     text2.x = 700;
     text2.y = 900;
 
@@ -149,5 +151,10 @@ h1 {
 
 .fontsize-36 {
   font-size: 3.6rem;
+}
+
+.torigger {
+  position: absolute;
+  top: 1000px;
 }
 </style>
