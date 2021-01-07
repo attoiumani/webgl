@@ -103,7 +103,7 @@ export default {
         trigger: ".torigger", // 要素".b"がビューポートに入ったときにアニメーション開始
         start: "top center", // アニメーション開始位置
         end: "top 200px", // アニメーション終了位置
-        //scrub: true, // アニメーションをスクロール位置にリンクさせる
+        scrub: true, // アニメーションをスクロール位置にリンクさせる
         markers: true, // マーカー表示
       },
     });
