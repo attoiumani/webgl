@@ -4,12 +4,6 @@
   
   
  <router-view />
- 
- 
- 
- 
- 
- 
   </div>
 </template>
 
