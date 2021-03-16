@@ -4,7 +4,7 @@
     <h1>Lionel Messi</h1>
     <canvas id="canvas1"></canvas>
     <div class="torigger"></div>
-  </div> 
+  </div>
 </template>
 
 <script>
@@ -19,7 +19,7 @@ export default {
   data() {
     return {
       imgPath: require(`@/assets/images/2019/messi2019.jpg`),
-      imgPath1: require(`@/assets/images/2019/2.jpg`)
+      imgPath1: require(`@/assets/images/2019/2.jpg`),
     };
   },
 
@@ -30,7 +30,7 @@ export default {
       height: 3000, //canvas縦幅
       /*width: 1000, //canvas横幅
       height: 4000, //canvas縦幅*/
-      autoResize: true //リサイズ処理
+      autoResize: true, //リサイズ処理
     });
 
     const container = new PIXI.Container();
@@ -41,7 +41,7 @@ export default {
       slices: 10,
       offset: 100,
       fillMode: 1,
-      speed: 0
+      speed: 0,
     });
 
     const image = PIXI.Sprite.from(this.imgPath);
@@ -51,20 +51,20 @@ export default {
     image.interactive = true;
     image.x = 500;
 
-    image.on("mouseover", function() {
+    image.on("mouseover", function () {
       app.ticker.maxFPS = 5;
-      app.ticker.add(function() {
+      app.ticker.add(function () {
         number.filters = [glitchFilter];
         image.filters = [glitchFilter];
         gsap.to(glitchFilter, 0, {
           offset: Math.floor(Math.random() * 100),
-          slices: Math.floor(Math.random() * 10)
+          slices: Math.floor(Math.random() * 10),
         });
       });
     });
 
-    image.on("mouseout", function() {
-      app.ticker.add(function() {
+    image.on("mouseout", function () {
+      app.ticker.add(function () {
         glitchFilter.offset = 0;
         glitchFilter.slices = 0;
       });
@@ -75,14 +75,14 @@ export default {
       fontWeight: "600",
       fill: 0x3b5a97,
       align: "center",
-      fontStyle: "italic"
+      fontStyle: "italic",
     };
 
     let TextStyle = {
       fill: 0x3b5a97,
       fontSize: 40,
       fontStyle: "oblique",
-      fontWeight: "bold"
+      fontWeight: "bold",
     };
 
     let number = new PIXI.Text("50 51 19", numberTextStyle);
@@ -105,8 +105,8 @@ export default {
         start: "top center", // アニメーション開始位置
         end: "top 200px", // アニメーション終了位置
         scrub: true, // アニメーションをスクロール位置にリンクさせる
-        markers: true // マーカー表示
-      }
+        markers: true, // マーカー表示
+      },
     });
     text2.x = 700;
     text2.y = 900;
@@ -130,11 +130,11 @@ export default {
         start: "top center", // アニメーション開始位置
         end: "top 200px", // アニメーション終了位置
         //scrub: true, // アニメーションをスクロール位置にリンクさせる
-        markers: true // マーカー表示
-      }
+        markers: true, // マーカー表示
+      },
     });
     container.addChild(image, number, graphics, text, text2);
-  }
+  },
 };
 </script>
 
