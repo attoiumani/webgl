@@ -140,26 +140,6 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-  margin-top: 0px;
-}
-
-.main {
-  font-size: 1.6rem;
-}
-
-.fontcolor-white {
-  color: white;
-}
-
-.fontsize-16 {
-  font-size: 1.6rem;
-}
-
-.fontsize-36 {
-  font-size: 3.6rem;
-}
-
 .torigger {
   position: absolute;
   top: 1000px;
