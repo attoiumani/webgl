@@ -1,7 +1,7 @@
 
 <template>
   <div class="main">
-    <h1>Lionel Messi</h1>
+     <h1>Lionel Messi</h1>
     <canvas id="canvas1"></canvas>
     <div class="torigger"></div>
   </div>
