@@ -1,7 +1,7 @@
 
 <template>
   <div class="main">
-     <h1>Lionel Messi</h1>
+    <h1>Lionel Messi</h1>
     <canvas id="canvas1"></canvas>
     <div class="torigger"></div>
   </div>
@@ -96,9 +96,9 @@ export default {
     text.x = 550;
     text.y = 760;
 
-    let VVD = new PIXI.Text("Virgil van Dijk", TextStyle);
-    gsap.set(VVD, { alpha: 0.0 });
-    gsap.to(VVD, 5, {
+    let text2 = new PIXI.Text("Virgil van Dijk", TextStyle);
+    gsap.set(text2, { alpha: 0.0 });
+    gsap.to(text2, 5, {
       alpha: 1.0,
       scrollTrigger: {
         trigger: ".torigger", // 要素".b"がビューポートに入ったときにアニメーション開始
@@ -108,8 +108,8 @@ export default {
         markers: true, // マーカー表示
       },
     });
-    VVD.x = 700;
-    VVD.y = 900;
+    text2.x = 700;
+    text2.y = 900;
 
     const graphics = new PIXI.Graphics();
     graphics.beginTextureFill(
@@ -123,23 +123,42 @@ export default {
     graphics.lineStyle(3, 0, 1);
     graphics.drawCircle(50, 300, 250);
     graphics.endFill();
-    gsap.set(graphics, { alpha: 0.0 });
     gsap.to(graphics, 5, {
-      alpha: 1.0,
+      alpha: 0.0,
       scrollTrigger: {
         trigger: ".torigger", // 要素".b"がビューポートに入ったときにアニメーション開始
         start: "top center", // アニメーション開始位置
         end: "top 200px", // アニメーション終了位置
-        scrub: true, // アニメーションをスクロール位置にリンクさせる
+        //scrub: true, // アニメーションをスクロール位置にリンクさせる
         markers: true, // マーカー表示
       },
     });
-    container.addChild(image, number, graphics, text, VVD);
+    container.addChild(image, number, graphics, text, text2);
   },
 };
 </script>
 
 <style scoped>
+h1 {
+  margin-top: 0px;
+}
+
+.main {
+  font-size: 1.6rem;
+}
+
+.fontcolor-white {
+  color: white;
+}
+
+.fontsize-16 {
+  font-size: 1.6rem;
+}
+
+.fontsize-36 {
+  font-size: 3.6rem;
+}
+
 .torigger {
   position: absolute;
   top: 1000px;
