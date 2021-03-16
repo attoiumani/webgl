@@ -17,7 +17,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default {
   data() {
   return {
-  imgPath: require(`@/assets/images/2019/messi2019.jpg`),
+    imgPath: require(`@/assets/images/2019/messi2019.jpg`),
     imgPath1: require(`@/assets/images/2019/2.jpg`),
     };
   },
