@@ -2,7 +2,7 @@
 <template>
   <div class="main">
      <h1>Lionel Messi</h1>
-    <canvas id="canvas1"></canvas>
+    <canvas id="canvas"></canvas>
     <div class="torigger"></div>
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
 
   mounted() {
     const app = new PIXI.Application({
-      view: document.querySelector("#canvas1"),
+      view: document.querySelector("#canvas"),
       width: window.innerWidth, //canvas横幅
       height: 3000, //canvas縦幅
       /*width: 1000, //canvas横幅
