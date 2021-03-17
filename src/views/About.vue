@@ -122,7 +122,7 @@ export default {
     graphics.x = 300;
     graphics.y = 800;
     graphics.lineStyle(3, 0, 1);
-    graphics.drawCircle(50, 300, 250);
+    graphics.drawPolygon(-200, 900,600,700,500,100,-100, 100,);// 頂点を配列で渡す [x1,y1,x2,y2,....]
     graphics.endFill();
     gsap.set(graphics, { alpha: 0.0 });
     gsap.to(graphics, 5, {
