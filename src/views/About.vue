@@ -2,9 +2,7 @@
 <template>
   <div class="main">
     <h1>Lionel Messi</h1>
-    <div class="canvas_wrapper">
-      <canvas id="canvas"></canvas>
-    </div>
+    <canvas id="canvas"></canvas>
     <div class="torigger"></div>
   </div>
 </template>
@@ -28,8 +26,12 @@ export default {
   mounted() {
     const app = new PIXI.Application({
       view: document.querySelector("#canvas"),
-      width: 1000, //canvas横幅
-      height: 3000, //canvas縦幅
+      width: document.body.clientWidth, //canvas横幅
+      height: 2000, //canvas縦幅
+      autoStart: true,
+      autoResize: true,
+      antialias: true,
+      resolution: devicePixelRatio,
     });
 
     const container = new PIXI.Container();
@@ -143,8 +145,8 @@ export default {
   position: absolute;
   top: 1000px;
 }
-.canvas_wrapper{
-	width:1000px;
-	margin:0 auto;
+.canvas_wrapper {
+  width: 1000px;
+  margin: 0 auto;
 }
 </style>
