@@ -115,6 +115,7 @@ export default {
         markers: true, // マーカー表示
       },
     });
+    VVD.skew.set(0.0,0.1);
     VVD.x = 900;
     VVD.y = 1100;
 
