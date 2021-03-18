@@ -19,6 +19,7 @@ export default {
     return {
       imgPath: require(`@/assets/images/2019/messi2019.jpg`),
       imgPath1: require(`@/assets/images/2019/2.jpg`),
+      imgPath2: require(`@/assets/images/2019/3.jpg`),
     };
   },
 
@@ -37,15 +38,16 @@ export default {
 
     app.stage.addChild(container);
 
+    const image = PIXI.Sprite.from(this.imgPath);
+    const image1 = PIXI.Texture.from(this.imgPath1);
+    const image2 = PIXI.Texture.from(this.imgPath2);
+
     const glitchFilter = new GlitchFilter({
       slices: 10,
       offset: 100,
       fillMode: 1,
       speed: 0,
     });
-
-    const image = PIXI.Sprite.from(this.imgPath);
-    const image1 = PIXI.Texture.from(this.imgPath1);
 
     image.hitArea = new PIXI.Rectangle(0, 0, 800, 512);
     image.interactive = true;
@@ -85,7 +87,7 @@ export default {
       fontWeight: "bold",
     };
 
-        let TextStyle1 = {
+    let TextStyle1 = {
       fill: 0x3b5a97,
       fontSize: 60,
       fontStyle: "oblique",
@@ -115,24 +117,23 @@ export default {
         markers: true, // マーカー表示
       },
     });
-    VVD.skew.set(0.0,0.1);
+    VVD.skew.set(0.0, 0.1);
     VVD.x = 900;
     VVD.y = 1100;
 
-    const graphics = new PIXI.Graphics();
-    graphics.beginTextureFill(
+    const VVDimage = new PIXI.Graphics();
+    VVDimage.beginTextureFill(
       image1,
       0xffffff,
       1,
       new PIXI.Matrix(1, 0, 0, 1, 500, 50)
     );
-    graphics.x = 300;
-    graphics.y = 1000;
-    graphics.lineStyle(3, 0, 1);
-    graphics.drawPolygon(-200, 650,500,635,500,50,-100, 50,);// 頂点を配列で渡す [x1,y1,x2,y2,....]左下右下右上左上x=横y=縦
-    graphics.endFill();
-    gsap.set(graphics, { alpha: 0.0 });
-    gsap.to(graphics, 5, {
+    VVDimage.x = 300;
+    VVDimage.y = 1000;
+    VVDimage.drawPolygon(-200, 650, 500, 635, 500, 50, -100, 50); // 頂点を配列で渡す [x1,y1,x2,y2,....]左下,右下,右上,左上,x=横y=縦
+    VVDimage.endFill();
+    gsap.set(VVDimage, { alpha: 0.0 });
+    gsap.to(VVDimage, 5, {
       alpha: 1.0,
       scrollTrigger: {
         trigger: ".torigger", // 要素".b"がビューポートに入ったときにアニメーション開始
@@ -142,7 +143,20 @@ export default {
         markers: true, // マーカー表示
       },
     });
-    container.addChild(image, number, graphics, text, VVD);
+
+    const CR7image = new PIXI.Graphics();
+    CR7image.beginTextureFill(
+      image2,
+      0xffffff,
+      1,
+      new PIXI.Matrix(1, 0, 0, 2, 500, 50)
+    );
+    CR7image.x = 800;
+    CR7image.y = 1000;
+    CR7image.drawPolygon(-200, 650, 500, 635, 500, 50, -100, 50); // 頂点を配列で渡す [x1,y1,x2,y2,....]左下,右下,右上,左上,x=横y=縦
+    CR7image.endFill();
+
+    container.addChild(image, number,text, VVD, VVDimage, CR7image);
   },
 };
 </script>
