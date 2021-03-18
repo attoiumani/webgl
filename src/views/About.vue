@@ -27,7 +27,7 @@ export default {
     const app = new PIXI.Application({
       view: document.querySelector("#canvas"),
       width: document.body.clientWidth, //canvas横幅
-      height: 2000, //canvas縦幅
+      height: 3000, //canvas縦幅
       autoStart: true,
       autoResize: true,
       antialias: true,
@@ -39,8 +39,8 @@ export default {
     app.stage.addChild(container);
 
     const image = PIXI.Sprite.from(this.imgPath);
-    const image1 = PIXI.Texture.from(this.imgPath1);
-    const image2 = PIXI.Texture.from(this.imgPath2);
+    const VVDimage = PIXI.Texture.from(this.imgPath1);
+    const CR7image = PIXI.Texture.from(this.imgPath2);
 
     const glitchFilter = new GlitchFilter({
       slices: 10,
@@ -121,19 +121,19 @@ export default {
     VVD.x = 900;
     VVD.y = 1100;
 
-    const VVDimage = new PIXI.Graphics();
-    VVDimage.beginTextureFill(
-      image1,
+    const VVDgraph = new PIXI.Graphics();
+    VVDgraph.beginTextureFill(
+      VVDimage,
       0xffffff,
       1,
       new PIXI.Matrix(1, 0, 0, 1, 500, 50)
     );
-    VVDimage.x = 300;
-    VVDimage.y = 1000;
-    VVDimage.drawPolygon(-200, 650, 500, 635, 500, 50, -100, 50); // 頂点を配列で渡す [x1,y1,x2,y2,....]左下,右下,右上,左上,x=横y=縦
-    VVDimage.endFill();
-    gsap.set(VVDimage, { alpha: 0.0 });
-    gsap.to(VVDimage, 5, {
+    VVDgraph.x = 300;
+    VVDgraph.y = 1000;
+    VVDgraph.drawPolygon(-200, 650, 500, 635, 500, 50, -100, 50); // 頂点を配列で渡す [x1,y1,x2,y2,....]左下,右下,右上,左上,x=横y=縦
+    VVDgraph.endFill();
+    gsap.set(VVDgraph, { alpha: 0.0 });
+    gsap.to(VVDgraph, 5, {
       alpha: 1.0,
       scrollTrigger: {
         trigger: ".torigger", // 要素".b"がビューポートに入ったときにアニメーション開始
@@ -144,19 +144,19 @@ export default {
       },
     });
 
-    const CR7image = new PIXI.Graphics();
-    CR7image.beginTextureFill(
-      image2,
+    const CR7graph = new PIXI.Graphics();
+    CR7graph.beginTextureFill(
+      CR7image,
       0xffffff,
       1,
-      new PIXI.Matrix(1, 0, 0, 2, 500, 50)
+      new PIXI.Matrix(1, 0, 0, 1, -30, 80)
     );
-    CR7image.x = 800;
-    CR7image.y = 1000;
-    CR7image.drawPolygon(-200, 650, 500, 635, 500, 50, -100, 50); // 頂点を配列で渡す [x1,y1,x2,y2,....]左下,右下,右上,左上,x=横y=縦
-    CR7image.endFill();
+    CR7graph.x = 1000;
+    CR7graph.y = 1900;
+    CR7graph.drawPolygon(-30, 510, 800, 500, 800,100,20 , 80); // 頂点を配列で渡す [x1,y1,x2,y2,....]左下,右下,右上,左上,x=横y=縦
+    CR7graph.endFill();
 
-    container.addChild(image, number,text, VVD, VVDimage, CR7image);
+    container.addChild(image, number,text, VVD, VVDgraph, CR7graph);
   },
 };
 </script>
