@@ -200,6 +200,41 @@ export default {
     container.addChild(image, number, text, VVD, VVDgraph, CR7, CR7graph);
   },
 };
+
+
+/*
+export default {
+  mounted() {
+    this.scrollItemC()
+  },
+  methods: {
+    scrollItemC() {
+      const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".wrapper",  // トリガーとなる要素は".wrapper"
+
+        // スクローラの中央の位置が起点(50%)
+        // トリガー要素.wrpperの中央に来たら発火(center)
+        start: "center 50%",
+
+        // スクローラの頂点が上から25%の位置が起点(25%)
+        // トリガー要素.wrpperの中央に来たら終了(center)
+        end: "center 25%",
+        scrub: true,
+        markers: true
+      }
+    });
+
+    // アニメーションの一連の動き
+    // 基本、すべて動かす要素は ".a"
+    tl.to(".a", {y: 200, scale: 2})
+    tl.to(".a", {x: 200, scale: 3})
+    tl.to(".a", {rotation: 360, y: 400, scale: 4})
+    tl.to(".a", {rotation: 90, x: 1000, y: 800, scale: 5})
+    }
+  }
+}
+*/
 </script>
 
 <style scoped>
