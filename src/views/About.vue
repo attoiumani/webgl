@@ -8,12 +8,14 @@
 </template>
 
 <script>
-import { gsap } from "gsap";
+import { gsap /*Bounce*/ } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import * as PIXI from "pixi.js";
 import { GlitchFilter } from "pixi-filters";
 
 gsap.registerPlugin(ScrollTrigger);
+var tl = gsap.timeline();
+
 
 export default {
   data() {
@@ -25,6 +27,7 @@ export default {
   },
 
   mounted() {
+ 
     const app = new PIXI.Application({
       view: document.querySelector("#canvas"),
       width: document.body.clientWidth, //canvas横幅
@@ -52,7 +55,7 @@ export default {
     });
     /*Pixiフィルター*/
 
-    /*テキスト用変数*/
+    /*テキスト変数*/
 
     let numberTextStyle = {
       fontSize: 200,
@@ -76,7 +79,7 @@ export default {
       fontWeight: "bold",
     };
 
-    /*ここまでテキスト変数*/
+    /*テキスト変数*/
 
     /*Messi*/
     image.hitArea = new PIXI.Rectangle(0, 0, 800, 512);
@@ -113,12 +116,12 @@ export default {
     );
     text.x = 550;
     text.y = 760;
-    /*Messi*/ 
+    /*Messi*/
 
     /*VVD*/
     let VVD = new PIXI.Text("Virgil van Dijk", TextStyle1);
     gsap.set(VVD, { alpha: 0.0 });
-    gsap.to(VVD, 5, {
+    gsap.to(VVD, {
       alpha: 1.0,
       scrollTrigger: {
         trigger: ".torigger", // 要素".b"がビューポートに入ったときにアニメーション開始
@@ -143,23 +146,19 @@ export default {
     VVDgraph.y = 1000;
     VVDgraph.drawPolygon(-200, 650, 500, 635, 500, 50, -100, 50); // 頂点を配列で渡す [x1,y1,x2,y2,....]左下,右下,右上,左上,x=横y=縦
     VVDgraph.endFill();
-    gsap.set(VVDgraph, { alpha: 0.0 });
-    gsap.to(VVDgraph, 5, {
-      alpha: 1.0,
-      scrollTrigger: {
-        trigger: ".torigger", // 要素".b"がビューポートに入ったときにアニメーション開始
-        start: "top center", // アニメーション開始位置
-        end: "top 200px", // アニメーション終了位置
-        scrub: true, // アニメーションをスクロール位置にリンクさせる
-        markers: true, // マーカー表示
-      },
-    });
+    tl.set(VVDgraph, { alpha: 0.0 });
+    tl.to(VVDgraph,{
+        alpha: 1.0,
+        //duration: 9,  //アニメーション時間
+      },3).to(VVDgraph, {
+      alpha: 0.5,
+    },"+=3");
     /* VVD*/
 
     /*CR7 */
     let CR7 = new PIXI.Text("Cristiano Ronaldo", TextStyle1);
     gsap.set(CR7, { alpha: 0.0 });
-    gsap.to(CR7, 5, {
+    gsap.to(CR7, {
       alpha: 1.0,
       scrollTrigger: {
         trigger: ".toriggerCR7", // 要素".b"がビューポートに入ったときにアニメーション開始
@@ -169,7 +168,7 @@ export default {
         markers: true, // マーカー表示
       },
     });
-    CR7.skew.set(2, 0);
+    CR7.skew.set(0, 0);
     CR7.x = 400;
     CR7.y = 2000;
 
@@ -185,8 +184,9 @@ export default {
     CR7graph.drawPolygon(-30, 510, 800, 500, 800, 100, 20, 80); // 頂点を配列で渡す [x1,y1,x2,y2,....]左下,右下,右上,左上,x=横y=縦
     CR7graph.endFill();
     gsap.set(CR7graph, { alpha: 0.0 });
-    gsap.to(CR7graph, 5, {
+    gsap.to(CR7graph, {
       alpha: 1.0,
+      //ease: Bounce.easeInOut,y:800,
       scrollTrigger: {
         trigger: ".toriggerCR7", // 要素".b"がビューポートに入ったときにアニメーション開始
         start: "top center", // アニメーション開始位置
