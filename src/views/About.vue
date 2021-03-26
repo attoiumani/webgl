@@ -113,7 +113,7 @@ export default {
     );
     text.x = 550;
     text.y = 760;
-    /*Messi*/
+    /*Messi*/ 
 
     /*VVD*/
     let VVD = new PIXI.Text("Virgil van Dijk", TextStyle1);
