@@ -14,15 +14,20 @@
 
 <script>
 import Vue from "vue";
+import SwiperCore, { EffectFade } from 'swiper';
 import { Swiper, SwiperSlide } from "swiper/swiper-bundle.esm";
 import getAwesomeSwiper from "vue-awesome-swiper/dist/exporter";
 Vue.use(getAwesomeSwiper(Swiper, SwiperSlide));
 import "swiper/swiper-bundle.css";
+//import 'swiper/components/effect-fade/effect-fade.scss';
+
+SwiperCore.use([EffectFade]);
 
 export default {
   data() {
     return {
       swiperOption: {
+        effect: 'coverflow',
         speed: 1000, //スライドの切り替わりスピード
         spaceBetween: 30, //各スライドの余白
         //centeredSlides: true, //スライダーを真ん中に
