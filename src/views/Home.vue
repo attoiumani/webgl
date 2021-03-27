@@ -1,7 +1,10 @@
 <template>
   <div>
     <swiper class="swiper" :options="swiperOption">
-      <swiper-slide class="swiper-slide"><router-link to="/about">2019</router-link></swiper-slide>
+      <swiper-slide class="swiper-slide">
+        <img src="~/assets/images/2.png">
+        <router-link to="/about">2019</router-link>
+      </swiper-slide>
       <swiper-slide class="swiper-slide">スライダー２</swiper-slide>
       <swiper-slide class="swiper-slide">スライダー３</swiper-slide>
     </swiper>
@@ -14,7 +17,7 @@
 
 <script>
 import Vue from "vue";
-import SwiperCore, { EffectFade } from 'swiper';
+import SwiperCore, { EffectFade } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/swiper-bundle.esm";
 import getAwesomeSwiper from "vue-awesome-swiper/dist/exporter";
 Vue.use(getAwesomeSwiper(Swiper, SwiperSlide));
@@ -27,7 +30,15 @@ export default {
   data() {
     return {
       swiperOption: {
-        effect: 'coverflow',
+        effect: "coverflow",
+        slidesPerView: "auto",
+        coverflowEffect: {
+          //rotate: 50,
+          //stretch: 0,
+          //depth: 100,
+          modifier: 1,
+          //slideShadows: true,
+        },
         speed: 1000, //スライドの切り替わりスピード
         spaceBetween: 30, //各スライドの余白
         //centeredSlides: true, //スライダーを真ん中に
@@ -76,8 +87,8 @@ export default {
   color: white;
 }
 
-.swiper-pagination{
-    left: 450px;
-    top: 480px;
+.swiper-pagination {
+  left: 450px;
+  top: 480px;
 }
 </style>
