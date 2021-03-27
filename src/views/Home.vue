@@ -2,7 +2,7 @@
   <div>
     <swiper class="swiper" :options="swiperOption">
       <swiper-slide class="swiper-slide">
-        <img src="~/assets/images/2.png">
+        <img src="@/assets/images/2019/2.jpg">
         <router-link to="/about">2019</router-link>
       </swiper-slide>
       <swiper-slide class="swiper-slide">スライダー２</swiper-slide>
@@ -45,8 +45,8 @@ export default {
         loop: true, //無限ループ
         autoplay: {
           //スライドの自動切り替え
-          delay: 5000, //スライドの自動切り替えの秒数
-          disableOnInteraction: false, //何らかのアクション後の自動切り替えを再開
+          //delay: 5000, //スライドの自動切り替えの秒数
+          //disableOnInteraction: false, //何らかのアクション後の自動切り替えを再開
         },
         pagination: {
           //ページネーション設定
