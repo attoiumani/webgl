@@ -14,8 +14,6 @@ import * as PIXI from "pixi.js";
 import { GlitchFilter } from "pixi-filters";
 
 gsap.registerPlugin(ScrollTrigger);
-var tl = gsap.timeline();
-
 
 export default {
   data() {
@@ -27,7 +25,6 @@ export default {
   },
 
   mounted() {
- 
     const app = new PIXI.Application({
       view: document.querySelector("#canvas"),
       width: document.body.clientWidth, //canvas横幅
@@ -120,18 +117,6 @@ export default {
 
     /*VVD*/
     let VVD = new PIXI.Text("Virgil van Dijk", TextStyle1);
-    gsap.set(VVD, { alpha: 0.0 });
-    gsap.to(VVD, {
-      alpha: 1.0,
-      scrollTrigger: {
-        trigger: ".torigger", // 要素".b"がビューポートに入ったときにアニメーション開始
-        start: "top center", // アニメーション開始位置
-        end: "top 200px", // アニメーション終了位置
-        scrub: true, // アニメーションをスクロール位置にリンクさせる
-        markers: true, // マーカー表示
-      },
-    });
-    VVD.skew.set(0.0, 0.1);
     VVD.x = 900;
     VVD.y = 1100;
 
@@ -146,28 +131,23 @@ export default {
     VVDgraph.y = 1000;
     VVDgraph.drawPolygon(-200, 650, 500, 635, 500, 50, -100, 50); // 頂点を配列で渡す [x1,y1,x2,y2,....]左下,右下,右上,左上,x=横y=縦
     VVDgraph.endFill();
-    tl.set(VVDgraph, { alpha: 0.0 });
-    tl.to(VVDgraph,{
-        alpha: 1.0,
-        //duration: 9,  //アニメーション時間
-      },3).to(VVDgraph, {
-      alpha: 0.5,
-    },"+=3");
-    /* VVD*/
 
-    /*CR7 */
-    let CR7 = new PIXI.Text("Cristiano Ronaldo", TextStyle1);
-    gsap.set(CR7, { alpha: 0.0 });
-    gsap.to(CR7, {
-      alpha: 1.0,
+    const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: ".toriggerCR7", // 要素".b"がビューポートに入ったときにアニメーション開始
+        trigger: ".torigger", // 要素".b"がビューポートに入ったときにアニメーション開始
         start: "top center", // アニメーション開始位置
         end: "top 200px", // アニメーション終了位置
         scrub: true, // アニメーションをスクロール位置にリンクさせる
         markers: true, // マーカー表示
       },
     });
+    gsap.set(VVDgraph, { alpha: 0.0 });
+    gsap.set(VVD, { alpha: 0.0 });
+    tl.to(VVDgraph, { alpha: 1 }).to(VVD, { alpha: 1 }, "<");
+    /* VVD*/
+
+    /*CR7 */
+    let CR7 = new PIXI.Text("Cristiano Ronaldo", TextStyle1);
     CR7.skew.set(0, 0);
     CR7.x = 400;
     CR7.y = 2000;
@@ -183,24 +163,23 @@ export default {
     CR7graph.y = 1900;
     CR7graph.drawPolygon(-30, 510, 800, 500, 800, 100, 20, 80); // 頂点を配列で渡す [x1,y1,x2,y2,....]左下,右下,右上,左上,x=横y=縦
     CR7graph.endFill();
-    gsap.set(CR7graph, { alpha: 0.0 });
-    gsap.to(CR7graph, {
-      alpha: 1.0,
-      //ease: Bounce.easeInOut,y:800,
+
+    const tlcr7 = gsap.timeline({
       scrollTrigger: {
         trigger: ".toriggerCR7", // 要素".b"がビューポートに入ったときにアニメーション開始
         start: "top center", // アニメーション開始位置
         end: "top 200px", // アニメーション終了位置
-        scrub: true, // アニメーションをスクロール位置にリンクさせる
         markers: true, // マーカー表示
       },
     });
+    gsap.set(CR7graph, { alpha: 0 });
+    gsap.set(CR7, { alpha: 0 });
+    tlcr7.to(CR7graph, { alpha: 1}).to(CR7, { alpha: 1}, );
     /*CR7 */
 
     container.addChild(image, number, text, VVD, VVDgraph, CR7, CR7graph);
   },
 };
-
 
 /*
 export default {
