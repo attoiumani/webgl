@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { gsap /*Bounce*/ } from "gsap";
+import { gsap ,Bounce} from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import * as PIXI from "pixi.js";
 import { GlitchFilter } from "pixi-filters";
@@ -38,10 +38,6 @@ export default {
     const container = new PIXI.Container();
 
     app.stage.addChild(container);
-
-    const image = PIXI.Sprite.from(this.imgPath);
-    const VVDimage = PIXI.Texture.from(this.imgPath1);
-    const CR7image = PIXI.Texture.from(this.imgPath2);
 
     /*Pixiフィルター*/
     const glitchFilter = new GlitchFilter({
@@ -79,6 +75,8 @@ export default {
     /*テキスト変数*/
 
     /*Messi*/
+    const image = PIXI.Sprite.from(this.imgPath);
+
     image.hitArea = new PIXI.Rectangle(0, 0, 800, 512);
     image.interactive = true;
     image.x = 500; //画像の位置
@@ -116,6 +114,8 @@ export default {
     /*Messi*/
 
     /*VVD*/
+    const VVDimage = PIXI.Texture.from(this.imgPath1);
+
     let VVD = new PIXI.Text("Virgil van Dijk", TextStyle1);
     VVD.x = 900;
     VVD.y = 1100;
@@ -137,16 +137,18 @@ export default {
         trigger: ".torigger", // 要素".b"がビューポートに入ったときにアニメーション開始
         start: "top center", // アニメーション開始位置
         end: "top 200px", // アニメーション終了位置
-        scrub: true, // アニメーションをスクロール位置にリンクさせる
+        //scrub: true, // アニメーションをスクロール位置にリンクさせる
         markers: true, // マーカー表示
       },
     });
     gsap.set(VVDgraph, { alpha: 0.0 });
     gsap.set(VVD, { alpha: 0.0 });
-    tl.to(VVDgraph, { alpha: 1 }).to(VVD, { alpha: 1 }, "<");
+    tl.to(VVDgraph, { alpha: 1 }).to(VVD, { alpha: 1 }, /*"<"*/);
     /* VVD*/
 
     /*CR7 */
+    const CR7image = PIXI.Texture.from(this.imgPath2);
+
     let CR7 = new PIXI.Text("Cristiano Ronaldo", TextStyle1);
     CR7.skew.set(0, 0);
     CR7.x = 400;
@@ -172,48 +174,15 @@ export default {
         markers: true, // マーカー表示
       },
     });
-    gsap.set(CR7graph, { alpha: 0 });
+    //gsap.set(CR7graph, { alpha: 0 });
     gsap.set(CR7, { alpha: 0 });
-    tlcr7.to(CR7graph, { alpha: 1}).to(CR7, { alpha: 1}, );
+    tlcr7.from(CR7graph, 4,{ease:Bounce.easeOut,y: 40 }).to(CR7, { alpha: 1 });
     /*CR7 */
 
     container.addChild(image, number, text, VVD, VVDgraph, CR7, CR7graph);
   },
 };
 
-/*
-export default {
-  mounted() {
-    this.scrollItemC()
-  },
-  methods: {
-    scrollItemC() {
-      const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".wrapper",  // トリガーとなる要素は".wrapper"
-
-        // スクローラの中央の位置が起点(50%)
-        // トリガー要素.wrpperの中央に来たら発火(center)
-        start: "center 50%",
-
-        // スクローラの頂点が上から25%の位置が起点(25%)
-        // トリガー要素.wrpperの中央に来たら終了(center)
-        end: "center 25%",
-        scrub: true,
-        markers: true
-      }
-    });
-
-    // アニメーションの一連の動き
-    // 基本、すべて動かす要素は ".a"
-    tl.to(".a", {y: 200, scale: 2})
-    tl.to(".a", {x: 200, scale: 3})
-    tl.to(".a", {rotation: 360, y: 400, scale: 4})
-    tl.to(".a", {rotation: 90, x: 1000, y: 800, scale: 5})
-    }
-  }
-}
-*/
 </script>
 
 <style scoped>

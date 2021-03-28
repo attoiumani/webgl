@@ -2,7 +2,7 @@
   <div>
     <swiper class="swiper" :options="swiperOption">
       <swiper-slide class="swiper-slide">
-        <img src="@/assets/images/2019/2.jpg">
+        <!--<img src="@/assets/images/2019/2.jpg">-->
         <router-link to="/about">2019</router-link>
       </swiper-slide>
       <swiper-slide class="swiper-slide">スライダー２</swiper-slide>
