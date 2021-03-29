@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { gsap ,Bounce} from "gsap";
+import { gsap, Bounce } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import * as PIXI from "pixi.js";
 import { GlitchFilter } from "pixi-filters";
@@ -35,9 +35,9 @@ export default {
       resolution: devicePixelRatio,
     });
 
-    const container = new PIXI.Container();
+    const container = new PIXI.Container(); //container作成
 
-    app.stage.addChild(container);
+    app.stage.addChild(container); //stageにcontainer追加
 
     /*Pixiフィルター*/
     const glitchFilter = new GlitchFilter({
@@ -120,6 +120,10 @@ export default {
     VVD.x = 900;
     VVD.y = 1100;
 
+    let VVDtext = new PIXI.Text("CL：優勝", TextStyle1);
+    VVDtext.x = 1000;
+    VVDtext.y = 1300;
+
     const VVDgraph = new PIXI.Graphics();
     VVDgraph.beginTextureFill(
       VVDimage,
@@ -143,7 +147,8 @@ export default {
     });
     gsap.set(VVDgraph, { alpha: 0.0 });
     gsap.set(VVD, { alpha: 0.0 });
-    tl.to(VVDgraph, { alpha: 1 }).to(VVD, { alpha: 1 }, /*"<"*/);
+    gsap.set(VVDtext, { alpha: 1.0 });
+    tl.to(VVDgraph, { alpha: 1 }).to(VVD, { alpha: 1 } /*"<"*/).from(VVDtext, 4,{ y: -10,alpha: 0});
     /* VVD*/
 
     /*CR7 */
@@ -176,13 +181,23 @@ export default {
     });
     //gsap.set(CR7graph, { alpha: 0 });
     gsap.set(CR7, { alpha: 0 });
-    tlcr7.from(CR7graph, 4,{ease:Bounce.easeOut,y: 40 }).to(CR7, { alpha: 1 });
+    tlcr7
+      .from(CR7graph, 4, { ease: Bounce.easeOut, y: 40 })
+      .to(CR7, { alpha: 1 });
     /*CR7 */
 
-    container.addChild(image, number, text, VVD, VVDgraph, CR7, CR7graph);
+    container.addChild(
+      image,
+      number,
+      text,
+      VVD,
+      VVDgraph,
+      VVDtext,
+      CR7,
+      CR7graph
+    );
   },
 };
-
 </script>
 
 <style scoped>
