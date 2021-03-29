@@ -35,9 +35,9 @@ export default {
       resolution: devicePixelRatio,
     });
 
-    const container = new PIXI.Container();
+    const container = new PIXI.Container();  //container作成
 
-    app.stage.addChild(container);
+    app.stage.addChild(container);  //stageにcontainer追加
 
     /*Pixiフィルター*/
     const glitchFilter = new GlitchFilter({
