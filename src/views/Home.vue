@@ -31,28 +31,28 @@ export default {
     return {
       swiperOption: {
         effect: "coverflow",
-        slidesPerView: "auto",
+        //slidesPerView: "auto",
         coverflowEffect: {
           //rotate: 50,
           //stretch: 0,
           //depth: 100,
           modifier: 1,
-          //slideShadows: true,
+          slideShadows: true,
         },
         speed: 1000, //スライドの切り替わりスピード
         spaceBetween: 30, //各スライドの余白
         //centeredSlides: true, //スライダーを真ん中に
         loop: true, //無限ループ
-        autoplay: {
+        //autoplay: {
           //スライドの自動切り替え
           //delay: 5000, //スライドの自動切り替えの秒数
           //disableOnInteraction: false, //何らかのアクション後の自動切り替えを再開
-        },
-        pagination: {
+        //},
+        /*pagination: {
           //ページネーション設定
           el: ".swiper-pagination",
           clickable: true,
-        },
+        },*/
         navigation: {
           //ナビゲーション設定
           nextEl: ".swiper-button-next",
@@ -64,9 +64,15 @@ export default {
 };
 </script>
 <style scoped>
+
+.swiper-container {
+  width: 100%;
+  height: 28vw;
+  }
+
 .swiper {
-  width: 300px !important;
-  height: 300px;
+  width: 800px;
+  height: 500px;
   position: absolute;
   left: 50%;
   top: 50%;
