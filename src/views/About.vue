@@ -181,7 +181,7 @@ export default {
     //gsap.set(CR7graph, { alpha: 0 });
     gsap.set(CR7, { alpha: 0 });
     tlcr7
-      .from(CR7graph, 4, { /*ease: Bounce.easeOut, y: 40*/ })
+      .from(CR7graph, 4, { ease: Bounce.easeOut, y: 40 })
       .to(CR7, { alpha: 1 });
     /*CR7 */
 
