@@ -147,7 +147,8 @@ export default {
     });
     gsap.set(VVDgraph, { alpha: 0.0 });
     gsap.set(VVD, { alpha: 0.0 });
-    tl.to(VVDgraph, { alpha: 1 }).to(VVD, { alpha: 1 } /*"<"*/);//.to(VVDtext, { x: 400 });
+    gsap.set(VVDtext, { alpha: 1.0 });
+    tl.to(VVDgraph, { alpha: 1 }).to(VVD, { alpha: 1 } /*"<"*/).from(VVDtext, 4,{ y: -10,alpha: 0});
     /* VVD*/
 
     /*CR7 */
