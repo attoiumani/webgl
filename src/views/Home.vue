@@ -64,14 +64,12 @@ export default {
 };
 </script>
 <style scoped>
-
 .swiper-container {
-  width: 100%;
-  height: 28vw;
-  }
+    overflow: inherit !important;
+}
 
 .swiper {
-  width: 800px;
+  width: 500px;
   height: 500px;
   position: absolute;
   left: 50%;
