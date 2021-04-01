@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { gsap, Bounce } from "gsap";
+import { gsap, /*Bounce*/ } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import * as PIXI from "pixi.js";
 import { GlitchFilter } from "pixi-filters";
@@ -75,18 +75,38 @@ export default {
     /*テキスト変数*/
 
     /*Messi*/
-    const image = PIXI.Sprite.from(this.imgPath);
+    const image = PIXI.Texture.from(this.imgPath);
+    const messigraph = new PIXI.Graphics();
+    messigraph.beginTextureFill(
+      image,
+      0xffffff,
+      1,
+      new PIXI.Matrix(1, 0, 0, 1, 500, 50)
+    );
+        messigraph.drawPolygon(-200, 650, 500, 635, 500, 50, -100, 50); // 頂点を配列で渡す [x1,y1,x2,y2,....]左下,右下,右上,左上,x=横y=縦
+    messigraph.endFill();
 
-    image.hitArea = new PIXI.Rectangle(0, 0, 800, 512);
-    image.interactive = true;
-    image.x = 500; //画像の位置
 
-    image.on("mouseover", function () {
+//ヒットエリア作成
+var poly = new PIXI.Polygon(
+    new PIXI.Point(-200, 650) ,
+    new PIXI.Point(500, 635),
+    new PIXI.Point(500, 50),
+    new PIXI.Point(-100, 50));
+
+
+    messigraph.hitArea =  poly; //new PIXI.Rectangle(0, 0, 800, 512);
+    messigraph.interactive = true;
+    messigraph.x = 1200; //画像の位置
+    messigraph.y = 100; //画像の位置
+
+
+    messigraph.on("mouseover", function () {
       //マウスホバー処理
       app.ticker.maxFPS = 5;
       app.ticker.add(function () {
         number.filters = [glitchFilter];
-        image.filters = [glitchFilter];
+        messigraph.filters = [glitchFilter];
         gsap.to(glitchFilter, 0, {
           offset: Math.floor(Math.random() * 100),
           slices: Math.floor(Math.random() * 10),
@@ -94,16 +114,16 @@ export default {
       });
     });
 
-    image.on("mouseout", function () {
+    messigraph.on("mouseout", function () {
       app.ticker.add(function () {
         glitchFilter.offset = 0;
         glitchFilter.slices = 0;
       });
     });
 
-    let number = new PIXI.Text("50 51 19", numberTextStyle);
-    number.x = 500;
-    number.y = 550;
+    let number = new PIXI.Text("50 /n 51 19", numberTextStyle);
+    number.x = 300;
+    number.y = 150;
 
     let text = new PIXI.Text(
       "GAME              GOAL                assist",
@@ -136,7 +156,7 @@ export default {
     VVDgraph.drawPolygon(-200, 650, 500, 635, 500, 50, -100, 50); // 頂点を配列で渡す [x1,y1,x2,y2,....]左下,右下,右上,左上,x=横y=縦
     VVDgraph.endFill();
 
-    const tl = gsap.timeline({
+    const tlVVD = gsap.timeline({
       scrollTrigger: {
         trigger: ".torigger", // 要素".b"がビューポートに入ったときにアニメーション開始
         start: "top center", // アニメーション開始位置
@@ -148,7 +168,7 @@ export default {
     gsap.set(VVDgraph, { alpha: 0.0 });
     gsap.set(VVD, { alpha: 0.0 });
     gsap.set(VVDtext, { alpha: 1.0 });
-    tl.to(VVDgraph, { alpha: 1 }).to(VVD, { alpha: 1 } /*"<"*/).from(VVDtext, 4,{ y: -10,alpha: 0});
+    tlVVD.to(VVDgraph, { alpha: 1 }).to(VVD, { alpha: 1 } /*"<"*/).from(VVDtext, 4,{ y: -10,alpha: 0});
     /* VVD*/
 
     /*CR7 */
@@ -181,13 +201,15 @@ export default {
     });
     //gsap.set(CR7graph, { alpha: 0 });
     gsap.set(CR7, { alpha: 0 });
+    gsap.set(CR7graph, { alpha: 0 });
     tlcr7
-      .from(CR7graph, 4, { ease: Bounce.easeOut, y: 40 })
+      //.from(CR7graph, 4, { ease: Bounce.easeOut, y: 40 })
+      .to(CR7graph, { alpha: 1 })
       .to(CR7, { alpha: 1 });
     /*CR7 */
 
     container.addChild(
-      image,
+      messigraph,
       number,
       text,
       VVD,
