@@ -2,13 +2,14 @@
 <template>
   <div class="main">
     <canvas id="canvas"></canvas>
-    <div class="torigger"></div>
+    <div class="toriggermessi"></div>
+    <div class="toriggerVVD"></div>
     <div class="toriggerCR7"></div>
   </div>
 </template>
 
 <script>
-import { gsap, /*Bounce*/ } from "gsap";
+import { gsap /*Bounce*/ } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import * as PIXI from "pixi.js";
 import { GlitchFilter } from "pixi-filters";
@@ -75,6 +76,14 @@ export default {
     /*テキスト変数*/
 
     /*Messi*/
+    let number = new PIXI.Text("50 \n 51 \n 19", numberTextStyle);
+    number.x = 300;
+    number.y = 150;
+
+    let text = new PIXI.Text("GAME\n\n\n\n\n  GOAL\n\n\n\n\n    assist", TextStyle);
+    text.x = 650;
+    text.y = 290;
+
     const image = PIXI.Texture.from(this.imgPath);
     const messigraph = new PIXI.Graphics();
     messigraph.beginTextureFill(
@@ -83,22 +92,22 @@ export default {
       1,
       new PIXI.Matrix(1, 0, 0, 1, 500, 50)
     );
-        messigraph.drawPolygon(-200, 650, 500, 635, 500, 50, -100, 50); // 頂点を配列で渡す [x1,y1,x2,y2,....]左下,右下,右上,左上,x=横y=縦
-    messigraph.endFill();
-
-
-//ヒットエリア作成
-var poly = new PIXI.Polygon(
-    new PIXI.Point(-200, 650) ,
-    new PIXI.Point(500, 635),
-    new PIXI.Point(500, 50),
-    new PIXI.Point(-100, 50));
-
-
-    messigraph.hitArea =  poly; //new PIXI.Rectangle(0, 0, 800, 512);
-    messigraph.interactive = true;
     messigraph.x = 1200; //画像の位置
     messigraph.y = 100; //画像の位置
+    messigraph.drawPolygon(-300, 560, 500, 560, 500, 50, -100, 50); // 頂点を配列で渡す [x1,y1,x2,y2,....]左下,右下,右上,左上,x=横y=縦
+    messigraph.endFill();
+
+  /*
+  //ヒットエリア作成
+    var poly = new PIXI.Polygon(
+      new PIXI.Point(-300, 560),
+      new PIXI.Point(500, 560),
+      new PIXI.Point(500, 50),
+      new PIXI.Point(-100, 50)
+    );
+
+    messigraph.hitArea = poly; //new PIXI.Rectangle(0, 0, 800, 512);
+    messigraph.interactive = true;
 
 
     messigraph.on("mouseover", function () {
@@ -120,17 +129,24 @@ var poly = new PIXI.Polygon(
         glitchFilter.slices = 0;
       });
     });
+*/
 
-    let number = new PIXI.Text("50 /n 51 19", numberTextStyle);
-    number.x = 300;
-    number.y = 150;
-
-    let text = new PIXI.Text(
-      "GAME              GOAL                assist",
-      TextStyle
-    );
-    text.x = 550;
-    text.y = 760;
+    const tlmessi = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".toriggermessi", // 要素".b"がビューポートに入ったときにアニメーション開始
+        start: "top center", // アニメーション開始位置
+        end: "top 200px", // アニメーション終了位置
+        //scrub: true, // アニメーションをスクロール位置にリンクさせる
+        markers: true, // マーカー表示
+      },
+    });
+    gsap.set(text, { alpha: 0 });
+    tlmessi
+      .to(text,9,{ alpha: 1 })
+      .to(glitchFilter, 0, {
+          offset: Math.floor(Math.random() * 100),
+          slices: Math.floor(Math.random() * 10),
+        })
     /*Messi*/
 
     /*VVD*/
@@ -158,7 +174,7 @@ var poly = new PIXI.Polygon(
 
     const tlVVD = gsap.timeline({
       scrollTrigger: {
-        trigger: ".torigger", // 要素".b"がビューポートに入ったときにアニメーション開始
+        trigger: ".toriggerVVD", // 要素".b"がビューポートに入ったときにアニメーション開始
         start: "top center", // アニメーション開始位置
         end: "top 200px", // アニメーション終了位置
         //scrub: true, // アニメーションをスクロール位置にリンクさせる
@@ -168,7 +184,10 @@ var poly = new PIXI.Polygon(
     gsap.set(VVDgraph, { alpha: 0.0 });
     gsap.set(VVD, { alpha: 0.0 });
     gsap.set(VVDtext, { alpha: 1.0 });
-    tlVVD.to(VVDgraph, { alpha: 1 }).to(VVD, { alpha: 1 } /*"<"*/).from(VVDtext, 4,{ y: -10,alpha: 0});
+    tlVVD
+      .to(VVDgraph, { alpha: 1 })
+      .to(VVD, { alpha: 1 } /*"<"*/)
+      .from(VVDtext, 4, { y: -10, alpha: 0 });
     /* VVD*/
 
     /*CR7 */
@@ -223,7 +242,11 @@ var poly = new PIXI.Polygon(
 </script>
 
 <style scoped>
-.torigger {
+.toriggermessi{
+  position: absolute;
+  top: 300px;
+}
+.toriggerVVD {
   position: absolute;
   top: 1000px;
 }
