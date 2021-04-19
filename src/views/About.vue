@@ -97,7 +97,6 @@ export default {
     messigraph.drawPolygon(-300, 560, 500, 560, 500, 50, -100, 50); // 頂点を配列で渡す [x1,y1,x2,y2,....]左下,右下,右上,左上,x=横y=縦
     messigraph.endFill();
 
-  /*
   //ヒットエリア作成
     var poly = new PIXI.Polygon(
       new PIXI.Point(-300, 560),
@@ -129,7 +128,6 @@ export default {
         glitchFilter.slices = 0;
       });
     });
-*/
 
     const tlmessi = gsap.timeline({
       scrollTrigger: {
@@ -145,7 +143,6 @@ export default {
       .to(text,9,{ alpha: 1 })
       .to(glitchFilter, 0, {
           offset: Math.floor(Math.random() * 100),
-          slices: Math.floor(Math.random() * 10),
         })
     /*Messi*/
 
