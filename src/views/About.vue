@@ -141,9 +141,6 @@ export default {
     gsap.set(text, { alpha: 0 });
     tlmessi
       .to(text,9,{ alpha: 1 })
-      .to(glitchFilter, 0, {
-          offset: Math.floor(Math.random() * 100),
-        })
     /*Messi*/
 
     /*VVD*/
